@@ -153,14 +153,6 @@
 
       event[18].addEventListener("mouseup", function(){
       event[18].setAttribute("style","transform:scale(1,1)")
-    }),
- 
-      event[19].addEventListener("mousedown", function(){
-      event[19].setAttribute("style","transform:scale(0.95,0.95)")
-    }),
-
-      event[19].addEventListener("mouseup", function(){
-      event[19].setAttribute("style","transform:scale(1,1)")
     })
   },
 
@@ -178,8 +170,17 @@
 
   metodoDividir:  function(valor1,valor2){
     return valor1 / valor2
+  },
+
+  metodoMostrarPantalla: function(valorDisplay,teclaPresionada){
+    if(valorDisplay == 0 ){
+      document.getElementById("display").innerHTML = "hola";
+    }
   }
 
  }
 
  calculadora.eventoClick();
+ 
+ var valorDisplay = document.getElementById("display");
+ calculadora.metodoMostrarPantalla(valorDisplay);
