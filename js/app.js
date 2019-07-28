@@ -1,5 +1,8 @@
 
  var calculadora = {
+    aux: 0,
+    operacion: "",  
+
 
   eventoClick: function(){
     event = document.getElementsByClassName("tecla");
@@ -156,31 +159,209 @@
     })
   },
 
-  metodoSumar:  function(valor1,valor2){
-    return valor1 + valor2
+  metodoSumar:  function(){
+    valorDisplay = document.getElementById("display");
+    aux = valorDisplay.innerHTML;
+    valorDisplay.innerHTML = "";
+    operacion = "+";
+    flag= true;
   },
 
-  metodoRestar:  function(valor1,valor2){
-    return valor1 - valor2
+  metodoRestar:  function(){
+    valorDisplay = document.getElementById("display");
+    aux = valorDisplay.innerHTML;
+    valorDisplay.innerHTML = " ";
+    operacion = "-";
+    flag= true;
   },
 
-  metodoMultiplicar:  function(valor1,valor2){
-    return valor1 * valor2
+  metodoMultiplicar:  function(){
+    valorDisplay = document.getElementById("display");
+    aux = valorDisplay.innerHTML;
+    valorDisplay.innerHTML = " ";
+    operacion = "*";
+    flag= true;
   },
 
-  metodoDividir:  function(valor1,valor2){
-    return valor1 / valor2
+  metodoDividir:  function(){
+    valorDisplay = document.getElementById("display");
+    aux = valorDisplay.innerHTML;
+    valorDisplay.innerHTML = " ";
+    operacion = "/";
+    flag= true;
   },
+  metodoBorrar: function(){
+    valorDisplay = document.getElementById("display").innerHTML = 0;
+  }, 
 
-  metodoMostrarPantalla: function(valorDisplay,teclaPresionada){
-    if(valorDisplay == 0 ){
-      document.getElementById("display").innerHTML = "hola";
+  metodoMostrarPantalla: function(teclaPresionada){
+    valorDisplay = document.getElementById("display");
+    if(valorDisplay.innerHTML.length < 8){
+       if(valorDisplay.innerHTML == "0"){
+           valorDisplay.innerHTML = teclaPresionada;
+       }else{
+        valorDisplay.innerHTML += teclaPresionada;
     }
   }
+ },
 
- }
+  metodoPunto: function(){
+    valorDisplay = document.getElementById("display");
+    if(valorDisplay.innerHTML.indexOf(".")==-1){
+       valorDisplay.innerHTML += "."
+    }
+  },
+
+  metodoSigno: function(){
+    valorDisplay = document.getElementById("display");
+    valorDisplay.innerHTML = valorDisplay.innerHTML * -1;
+    },
+
+  metodoIgual: function(){
+    display = document.getElementById("display");
+    if (operacion=="+") {
+      if(flag == true){
+        ultValor = display.innerHTML;
+      }
+      display.innerHTML=parseFloat(aux) + parseFloat(ultValor);
+      display.innerHTML = display.innerHTML.substring(0,7)
+      aux = display.innerHTML;
+      flag = false;
+    }else if (operacion=="-") {
+      if(flag == true){
+        ultValor = display.innerHTML;
+      }
+      display.innerHTML=parseFloat(aux) - parseFloat(ultValor);
+      display.innerHTML = display.innerHTML.substring(0,7)
+      aux = display.innerHTML;
+      flag = false
+    }else if (operacion=="*") {
+      if(flag == true){
+        ultValor = display.innerHTML;
+      }
+      display.innerHTML=parseFloat(aux) * parseFloat(ultValor);
+      display.innerHTML = display.innerHTML.substring(0,7)
+      aux = display.innerHTML;
+      flag = false
+    }else if (operacion=="/") {
+      if(flag == true){
+        ultValor = display.innerHTML;
+      }
+      display.innerHTML=parseFloat(aux) / parseFloat(ultValor);
+      display.innerHTML = display.innerHTML.substring(0,7)
+      aux = display.innerHTML;
+      flag = false
+    }
+  }
+   
+
+// FIN OBJETO "CALCULADORA"
+};
 
  calculadora.eventoClick();
- 
- var valorDisplay = document.getElementById("display");
- calculadora.metodoMostrarPantalla(valorDisplay);
+
+
+// DETECTA LA TECLA PRESIONADA Y LA MUESTRA EN EL DISPLAY
+
+
+///////////// ↓↓↓↓ TECLAS NUMEROS ↓↓↓↓ /////////////
+ var tecla0 = document.getElementById("0");
+  tecla0.addEventListener("click",function(){
+    calculadora.metodoMostrarPantalla(0);
+  });
+
+  var tecla1 = document.getElementById("1");
+  tecla1.addEventListener("click",function(){
+    calculadora.metodoMostrarPantalla(1);
+  });
+
+  var tecla2 = document.getElementById("2");
+  tecla2.addEventListener("click",function(){
+    calculadora.metodoMostrarPantalla(2);
+  });
+
+  var tecla3 = document.getElementById("3");
+  tecla3.addEventListener("click",function(){
+    calculadora.metodoMostrarPantalla(3);
+  });
+
+  var tecla4 = document.getElementById("4");
+  tecla4.addEventListener("click",function(){
+    calculadora.metodoMostrarPantalla(4);
+  });
+
+  var tecla5 = document.getElementById("5");
+  tecla5.addEventListener("click",function(){
+    calculadora.metodoMostrarPantalla(5);
+  });
+
+  var tecla6 = document.getElementById("6");
+  tecla6.addEventListener("click",function(){
+    calculadora.metodoMostrarPantalla(6);
+  });
+
+  var tecla7 = document.getElementById("7");
+  tecla7.addEventListener("click",function(){
+    calculadora.metodoMostrarPantalla(7);
+  });
+
+  var tecla8 = document.getElementById("8");
+  tecla8.addEventListener("click",function(){
+    calculadora.metodoMostrarPantalla(8);
+  });
+
+  var tecla9 = document.getElementById("9");
+  tecla9.addEventListener("click",function(){
+    calculadora.metodoMostrarPantalla(9);
+  });
+//////////// ↑↑↑↑ TECLAS NUMEROS ↑↑↑↑ /////////////
+
+//-----------------------------------------//
+//ESCUCHADOR DE EVENTO ENCENDIDO
+  var teclaOn = document.getElementById("on");
+  teclaOn.addEventListener("click",function(){
+    calculadora.metodoBorrar();
+  });
+//ESCUCHADOR DE EVENTO TECLA PUNTO
+  var teclaPunto = document.getElementById("punto");
+  teclaPunto.addEventListener("click", function(){
+    calculadora.metodoPunto();
+  });
+//ESCUCHADOR DE EVENTO SIGNO MENOS
+  var teclaSigno = document.getElementById("sign");
+  teclaSigno.addEventListener("click",function(){
+    calculadora.metodoSigno();
+  });
+
+//ESCUCHADOR DE EVENTO TECLA IGUAL
+  var teclaIgual = document.getElementById("igual");
+  teclaIgual.addEventListener("click",function(){
+    calculadora.metodoIgual();
+  });
+
+
+///////////// ↓↓↓↓ OPERACIONES ↓↓↓↓ /////////////
+  var teclaDividir = document.getElementById("dividido");
+  teclaDividir.addEventListener("click",function(){
+    calculadora.metodoDividir();
+  });
+
+  var teclaMultiplicar = document.getElementById("por");
+  teclaMultiplicar.addEventListener("click",function(){
+    calculadora.metodoMultiplicar();
+  });
+
+  var teclaSumar = document.getElementById("mas");
+  teclaSumar.addEventListener("click",function(){
+    calculadora.metodoSumar();
+  });
+
+  var teclaRestar = document.getElementById("menos");
+  teclaRestar.addEventListener("click",function(){
+    calculadora.metodoRestar();
+  });
+
+
+  
+///////////// ↑↑↑↑ OPERACIONES ↑↑↑↑ /////////////  
+
